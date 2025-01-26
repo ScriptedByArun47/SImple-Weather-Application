@@ -1,0 +1,51 @@
+Project Overview
+This application provides a dynamic, interactive weather app that:
+
+Displays a video background.
+Retrieves real-time weather information for a user-specified city from OpenWeatherMap API.
+Shows the current weather and a 5-day forecast, with corresponding weather icons.
+Uses customtkinter for a modern-looking GUI and OpenCV for video display.
+Libraries Used
+customtkinter: A custom tkinter module that extends the basic tkinter library for creating modern and visually appealing interfaces.
+requests: For sending HTTP requests to the OpenWeatherMap API to retrieve weather data.
+cv2 (OpenCV): For handling video capture and displaying it in the background of the app.
+PIL (Pillow): For handling images, specifically for resizing and displaying the video frames.
+messagebox: For displaying error messages in case of invalid input or API errors.
+Project Flow
+Main Window Setup:
+
+The main window (app) is created using customtkinter.CTk().
+The window is configured with a fixed size (400x700), a non-resizable property (wm_resizable(False, False)), and a background color (#98AECF).
+Video Background:
+
+A video file (background.mp4) is loaded using OpenCV’s cv2.VideoCapture().
+The video is resized dynamically to match the window size and continuously updated every 50 milliseconds using update_video(). The video is displayed as a full-window background by placing the video_label at full window size (relwidth=1, relheight=1).
+City Input and Weather Data Fetching:
+
+The user enters a city name in the city_entry text field.
+Upon clicking the "Get Weather" button (fetch_button), the fetch_weather() function is triggered.
+It calls the OpenWeatherMap API to fetch:
+Current weather data (temperature, description, wind speed, and humidity).
+5-day weather forecast with specific details about temperature and weather condition descriptions at noon each day.
+The weather data is then updated on the GUI:
+Current weather information is shown in the current_weather_frame.
+The 5-day forecast is displayed in the weather_frame.
+Displaying Weather Icons:
+
+The weather icons are represented as emojis (e.g., sunny ☀️, rainy 🌧️, etc.) based on the description returned from the API.
+These icons are mapped using a dictionary and displayed along with the forecast data.
+Error Handling:
+
+Error messages are shown through a messagebox if the city entered is invalid or if there's a failure in fetching data.
+It also handles the case where the video file can't be loaded.
+GUI Components:
+
+CTkFrame: Used to create frames for displaying content (current weather and forecast) with a glassmorphism effect (transparent frames with blurred background images).
+CTkLabel: Used for displaying text and images (such as weather descriptions, temperature, and the video).
+CTkButton: A button to trigger the weather fetch process.
+Background Image:
+
+A background image (glassmorphism_effect1.png) is used in the weather frames to add a stylish effect. This image is applied as a label inside the frame and fills it entirely.
+Video Capture Cleanup:
+
+At the end of the program, the video capture is released with video_capture.release() when the window is closed.
